@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrDupe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>TrDupe Planner</h1>
+    <div class="topbar-right">
+      <div id="currentUser">Signed out</div>
+      <div id="syncStatus">Sync idle</div>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>Training Calendar</h2>
+      <div class="toolbar">
+        <button id="prevMonth">Prev</button>
+        <strong id="monthLabel"></strong>
+        <button id="nextMonth">Next</button>
+      </div>
+      <div id="calendar" class="calendar"></div>
+    </section>
+
+    <aside class="panel side">
+      <h2>Planner Controls</h2>
+      <h3>Server Config</h3>
+      <div class="field">
+        <label>Strava OAuth</label>
+        <div id="stravaConfig" class="status">Checking...</div>
+      </div>
+      <div class="field">
+        <label>Zwift OAuth</label>
+        <div id="zwiftConfig" class="status">Checking...</div>
+      </div>
+
+      <div class="field">
+        <label>Disciplines (comma separated)</label>
+        <input id="disciplines" value="cycling,running,triathlon" />
+      </div>
+      <div class="field">
+        <label>Weeks</label>
+        <input id="weeks" type="number" min="1" max="24" value="8" />
+      </div>
+      <button id="generateBtn">Generate Plan</button>
+
+      <h3>Mark Workout Complete</h3>
+      <div class="field">
+        <label>Plan Entry ID</label>
+        <input id="completePlanId" type="number" />
+      </div>
+      <div class="field">
+        <label>TSS</label>
+        <input id="completeTss" type="number" value="60" />
+      </div>
+      <div class="field">
+        <label>Duration (min)</label>
+        <input id="completeDuration" type="number" value="60" />
+      </div>
+      <div class="field">
+        <label>Discipline</label>
+        <select id="completeDiscipline">
+          <option>cycling</option>
+          <option>running</option>
+          <option>triathlon</option>
+        </select>
+      </div>
+      <button id="completeBtn">Save Completion</button>
+
+      <h3>Send to Zwift</h3>
+      <div class="field">
+        <label>Plan Entry ID</label>
+        <input id="zwiftPlanId" type="number" />
+      </div>
+      <button id="sendZwiftBtn">Send Workout</button>
+      <a id="zwoDownload" target="_blank"></a>
+
+      <h3>Integrations</h3>
+      <div class="field">
+        <label>Strava</label>
+        <div id="stravaStatus">Not connected</div>
+        <div id="stravaPrompt" class="status">Connect Strava to import completed activities on app open.</div>
+      </div>
+      <button id="connectStrava">Connect Strava</button>
+
+      <div class="field">
+        <label>Zwift</label>
+        <div id="zwiftStatus">Not connected</div>
+        <div id="zwiftPrompt" class="status">Connect Zwift to push planned workouts directly.</div>
+      </div>
+      <button id="connectZwift">Connect Zwift</button>
+      <div class="field">
+        <label>Zwift Upload URL</label>
+        <input id="zwiftUploadUrl" placeholder="Optional API endpoint" />
+      </div>
+      <button id="saveZwiftConfig">Save Zwift Config</button>
+
+      <button id="syncBtn">Sync Apps Now</button>
+      <pre id="log"></pre>
+    </aside>
+  </main>
+
+  <div id="workoutModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Workout</h3>
+        <button id="closeModal">Close</button>
+      </div>
+      <div id="modalMeta"></div>
+      <canvas id="workoutGraph" width="760" height="220"></canvas>
+      <div class="modal-actions">
+        <button id="modalSendZwift">Send to Zwift</button>
+        <a id="modalDownloadZwo" target="_blank"></a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

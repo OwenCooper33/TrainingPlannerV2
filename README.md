@@ -18,6 +18,15 @@ python3 server.py
 
 Then open `http://localhost:8080`.
 
+## Authentication
+
+- You must log in to use the planner and API.
+- Open `http://localhost:8080/login.html` to:
+  - create an account
+  - log in with email/password
+- After login, app sessions are stored in an HTTP-only cookie.
+- `Strava` and `Zwift` connect buttons are shown after login, and the app prompts you to connect each service when not yet connected.
+
 ## Integrations
 
 - The app shows a startup `Server Config` section listing missing OAuth environment variables.
@@ -40,4 +49,3 @@ Then open `http://localhost:8080`.
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
-# TrainingPlannerV2

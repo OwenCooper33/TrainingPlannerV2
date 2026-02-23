@@ -1,0 +1,2 @@
+# TrDupe currently uses only Python standard library modules.
+# This file is present for deployment platforms (Render, etc.).
